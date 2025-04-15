@@ -1,34 +1,89 @@
 #include <stdio.h>
+#include <string.h>
+
+// Movimento recursivo da Torre
+void movimentoTorre(int casas) {
+    if (casas > 0) {
+        printf("Cima\n");
+        movimentoTorre(casas - 1);
+    }
+}
+
+// Movimento recursivo do Bispo
+void movimentoBispo(int casas) {
+    if (casas > 0) {
+        printf("Cima Direita\n");
+        movimentoBispo(casas - 1);
+    }
+}
+
+// Movimento recursivo da Rainha
+void movimentoRainha(int casas) {
+    if (casas > 0) {
+        printf("Esquerda\n");
+        movimentoRainha(casas - 1);
+    }
+}
+
+// Movimento do Cavalo usando loops aninhados
+void movimentoCavalo(int movimentos) {
+    for (int m = 0; m < movimentos; m++) {
+        printf("Movimento %d do Cavalo:\n", m + 1);
+        for (int i = 0; i < 3; i++) {
+            if (i < 2) {
+                printf("Cima\n");  // duas casas para cima
+            } else {
+                printf("Direita\n");  // uma casa para direita
+            }
+        }
+        printf("\n");
+    }
+}
 
 int main() {
-   
-    // utilizando o for 
-    int casasTorre = 5;
-    printf("\nMovimento da Torre:\n");
+    char escolhaPeca[10];
+    int rodadas;
 
-    for (int i = 0; i < casasTorre; i++) {
-        printf("Direita\n");
-    };
+    printf("quantas rodadas tera o jogo? ");
+    scanf("%d", &rodadas);
 
-    // utilizando o while
-    int casasBispo = 5;
-    int casasB = 0;
-    printf("\nmovimento do Bispo:\n");
-    while (casasB < casasBispo) {
-        printf("Cima Direita\n");
-        casasB++;
+    for (int i = 0; i < rodadas; i++) {
+        printf("Qual peça deseja movimentar (torre, bispo, rainha, cavalo): ");
+        scanf("%s", escolhaPeca);
+
+        if (strcmp(escolhaPeca, "torre") == 0) {
+            int movimento;
+            printf("Quantas vezes deseja mover a Torre: ");
+            scanf("%d", &movimento);
+            printf("Movimentando a Torre %d vezes:\n", movimento);
+            movimentoTorre(movimento);
+
+        } else if (strcmp(escolhaPeca, "bispo") == 0) {
+            int movimento;
+            printf("Quantas vezes deseja mover o Bispo: ");
+            scanf("%d", &movimento);
+            printf("Movimentando o Bispo %d vezes:\n", movimento);
+            movimentoBispo(movimento);
+
+        } else if (strcmp(escolhaPeca, "rainha") == 0) {
+            int movimento;
+            printf("Quantas vezes deseja mover a Rainha: ");
+            scanf("%d", &movimento);
+            printf("Movimentando a Rainha %d vezes:\n", movimento);
+            movimentoRainha(movimento);
+
+        } else if (strcmp(escolhaPeca, "cavalo") == 0) {
+            int movimento;
+            printf("Quantas vezez deseja mover o cavalo? ");
+            scanf("%d", &movimento);
+            movimentoCavalo(movimento);
+
+        } else {
+            printf("Peça inválida!\n");
+        }
+
+        printf("\n");
     }
-
-    // utilizando o do while
-    int casasRainha = 8;
-    int casasR = 0;
-    printf("\nMovimento da Rainha:\n");
-    do {
-        printf("Esquerda\n");
-        casasR++;
-    } while (casasR < casasRainha);
-    
-    
 
     return 0;
 }
